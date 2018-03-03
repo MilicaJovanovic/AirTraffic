@@ -20,18 +20,21 @@
     <script src="/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
   </head>
   <body>
+    <div class="background-image"></div>
     <div class="container">
-      <h1> Welcome to the AirTraffic</h1>
-      <h4>Here you can see all the airplanes that are flying over you location. In the list above you can see fligth details available and sort airplanes by altitude they are flying at.</h4>
-      <table id="data-table" width="100%">
-        <thead>  
-          <tr>  
-            <th>Direction</th>
-            <th>Altitude</th>
-            <th>Flight code number</th>
-          </tr>  
-       </thead> 
-      </table>
+      <h1 class="title"> Welcome to the AirTraffic</h1>
+      <h4 class="description">Here you can see all the airplanes that are flying over you location. In the list above you can see fligth details available and sort airplanes by altitude they are flying at.</h4>
+      <div class="table-part">
+        <table id="data-table" width="100%">
+          <thead>  
+            <tr>  
+              <th>Direction</th>
+              <th>Altitude</th>
+              <th>Flight code number</th>
+            </tr>  
+         </thead> 
+        </table>
+      </div>
     </div>
 
     <!-- Loading app scripts -->
