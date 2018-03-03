@@ -1,0 +1,29 @@
+{
+  "name": "airtrafic",
+  "version": "1.0.0",
+  "description": "Interview test project for Quantox.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilicaJovanovic/AirTraffic.git"
+  },
+  "keywords": [
+    "air",
+    "traffic",
+    "test",
+    "airplane"
+  ],
+  "author": "Milica Jovanovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MilicaJovanovic/AirTraffic/issues"
+  },
+  "homepage": "https://github.com/MilicaJovanovic/AirTraffic#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
