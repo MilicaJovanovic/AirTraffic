@@ -17,7 +17,6 @@ geolocationAllowed = () => {
   getLocation();
   loadAirplaneData();
   document.getElementById("description").innerHTML = "Here you can see all the airplanes that are flying over you location. In the list above you can see fligth details available and sort airplanes by altitude they are flying at.";
-  document.getElementById("table-part").style.display = "block";
 }
 
 /*
@@ -81,6 +80,8 @@ loadAirplaneData = () => {
  */
 generateTableRow = (airplaneData) => {
   let tableRow = document.createElement('tr');
+  tableRow.style.border = '1px solid black';
+  tableRow.onclick = () => showFlightDetails(airplaneData);
 
   let tdAirplaneDirection = document.createElement('td');
   if (calculateAirplaneDirection(airplaneData) === 'W') {
@@ -115,4 +116,34 @@ calculateAirplaneDirection = (airplaneData) => {
     return 'W';
   }
   return 'E';
+}
+
+/*
+ * Going from fliht details page back to
+ * list of all flighs
+ */
+back = () => {
+  $.get('/templates/index.html', function(template, textStatus, jqXhr) {
+    $('#route-view').html(Mustache.render($(template).filter('#index').html()))
+  });
+  loadAirplaneData();
+}
+
+/*
+ * Loading new Muctache template for showing
+ * flight details
+ */
+showFlightDetails = (airplaneData) => {
+  const pageParams = {
+    airplaneModel: airplaneData.Mdl,
+    airportFrom: airplaneData.From,
+    airportTo: airplaneData.To,
+    airline: airplaneData.Op,
+    onclick: function() {
+      alert('remo');
+    }
+  }
+  $.get('../templates/flight-details.html', function(template, textStatus, jqXhr) {
+    $('#route-view').html(Mustache.render($(template).filter('#flight-details').html(), pageParams))
+  });
 }
