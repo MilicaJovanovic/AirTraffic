@@ -12,14 +12,14 @@
         
     <!-- Loading libraries -->
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    
+
     <script src="/node_modules/mustache/mustache.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div class="background-image"></div>
+    <!-- <div class="background-image"></div>
     <div class="container">
       <h1 class="title"> Welcome to the AirTraffic</h1>
       <h4 id="description"></h4>
@@ -34,7 +34,9 @@
          </thead> 
         </table>
       </div>
-    </div>
+    </div> -->
+
+    <div id="route-view"></div>
 
     <!-- Permision Modal -->
     <div class="modal fade" id="locationModal" role="dialog">
@@ -57,5 +59,10 @@
 
     <!-- Loading app scripts -->
     <script src="js/index.js"></script>
+    <script type="text/javascript">
+      $.get('/templates/index.html', function(template, textStatus, jqXhr) {
+        $('#route-view').html(Mustache.render($(template).filter('#index').html()))
+      });
+    </script>
   </body>
 </html>
