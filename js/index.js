@@ -56,8 +56,7 @@ getLatLong = (position) => {
  * Loads airplane data from API by using fetch
  */
 loadAirplaneData = (lastDv) => {
-  // let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
-  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json';
+  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
   if (lastDv != 0) {
     url = url + '&ldv=' + lastDv;
   }

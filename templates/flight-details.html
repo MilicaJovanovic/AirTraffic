@@ -2,11 +2,26 @@
   <div class="background-image"></div>
   <div class="container">
     <h1 class="title">Flight details</h1>
-    <h3>Aircraft registration: {{airplaneModel}}</h3>
-    <h3>Take off location: {{airportFrom}}</h3>
-    <h3>Destination: {{airportTo}}</h3>
-    <h3>Airline: {{airline}}</h3>
-
-    <button type="button" onclick="back()">Back</button>
+    <div id="table-part">
+   		<span>
+				<h4>Aircraft registration:</h4>
+				<p>{{airplaneModel}}</p>
+   		</span>
+   		<span>
+   			<h4>Take off location:</h4>
+   			<p>{{airportFrom}}</p>
+   		</span>
+   		<span>
+   			<h4>Destination:</h4>
+   			<p>{{airportTo}}</p>
+   		</span>
+   		<span>
+   			<h4>Airline:</h4>
+   			<p>{{airline}}</p>
+   		</span>
+   		<div class="footer">
+	    	<button class="back-button" type="button" onclick="back()">Back</button>
+   		</div>
+    </div>
   </div>
 </script>
