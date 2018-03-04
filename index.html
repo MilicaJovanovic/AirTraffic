@@ -15,16 +15,13 @@
 
     <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="/node_modules/datatables/media/css/jquery.dataTables.min.css">
-    <script src="/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
   </head>
   <body>
     <div class="background-image"></div>
     <div class="container">
       <h1 class="title"> Welcome to the AirTraffic</h1>
-      <h4 class="description">Here you can see all the airplanes that are flying over you location. In the list above you can see fligth details available and sort airplanes by altitude they are flying at.</h4>
-      <div class="table-part">
+      <h4 id="description"></h4>
+      <div id="table-part">
         <table id="data-table" width="100%">
           <thead>  
             <tr>  
@@ -34,6 +31,25 @@
             </tr>  
          </thead> 
         </table>
+      </div>
+    </div>
+
+    <!-- Permision Modal -->
+    <div class="modal fade" id="locationModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">AirTraffic</h4>
+          </div>
+          <div class="modal-body">
+            <p>Can AirTraffic use your location?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" onClick="geolocationAllowed()">Yes</button>
+            <button type="button" class="btn btn-default" onClick="geolocationNotAllowed()">No</button>
+          </div>
+        </div>
       </div>
     </div>
 
