@@ -4,6 +4,7 @@ const planeRight = "<img style='width: 25px; height: 25px;' src='../images/plane
 var lat = 0.0;
 var lng = 0.0;
 let lastPlaneListId = 0;
+let dataInterval = null;
 
 $(document).ready(() => {
   $('#locationModal').modal('show');
@@ -16,9 +17,10 @@ $(document).ready(() => {
 geolocationAllowed = () => {
   $('#locationModal').modal('hide');
   getLocation();
-  setInterval(() => {
+  loadAirplaneData(lastPlaneListId);
+  dataInterval = setInterval(() => {
     loadAirplaneData(lastPlaneListId);
-  }, 5000);
+  }, 60*1000);
   document.getElementById("description").innerHTML = "Here you can see all the airplanes that are flying over you location. In the list above you can see fligth details available and sort airplanes by altitude they are flying at.";
 }
 
@@ -67,12 +69,15 @@ loadAirplaneData = (lastDv) => {
       .then((data) => {
         const airplaneList = data.acList;
         const table = document.getElementById('data-table');
+        
+        // Emptying table to refresh with new data
+        $("#data-table").empty();
+        table.appendChild(generateTableHeader());
 
         // Creating table content
         airplaneList.forEach((element) => {
           if (element.Alt !== undefined) {
-            const tableRow = generateTableRow(element);
-            table.appendChild(tableRow);
+            table.appendChild(generateTableRow(element));
           }
         });
       });
@@ -81,6 +86,24 @@ loadAirplaneData = (lastDv) => {
       console.log('error ' + err);
     });
   }, 1500);
+}
+
+/*
+ * Generating table header
+ */
+generateTableHeader = () => {
+  const tableHeader = document.createElement('thead');
+  let headerDirection = document.createElement('th');
+  headerDirection.innerHTML = 'Direction';
+  let headerAltitude = document.createElement('th');
+  headerAltitude.innerHTML = 'Altitude';
+  let headerFlightCode = document.createElement('th');
+  headerFlightCode.innerHTML = 'Flight code number';
+  tableHeader.appendChild(headerDirection);
+  tableHeader.appendChild(headerAltitude);
+  tableHeader.appendChild(headerFlightCode);
+
+  return tableHeader;
 }
 
 /*
@@ -136,6 +159,9 @@ back = () => {
     $('#route-view').html(Mustache.render($(template).filter('#index').html()))
   });
   loadAirplaneData(lastPlaneListId);
+  dataInterval = setInterval(() => {
+    loadAirplaneData(lastPlaneListId);
+  }, 60*1000);
 }
 
 /*
@@ -143,6 +169,7 @@ back = () => {
  * flight details
  */
 showFlightDetails = (airplaneData) => {
+  clearInterval(dataInterval);
   const pageParams = {
     airplaneModel: airplaneData.Mdl,
     airportFrom: airplaneData.From,
