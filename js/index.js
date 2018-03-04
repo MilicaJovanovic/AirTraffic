@@ -56,8 +56,8 @@ getLatLong = (position) => {
  * Loads airplane data from API by using fetch
  */
 loadAirplaneData = (lastDv) => {
-  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
-
+  // let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
+  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json';
   if (lastDv != 0) {
     url = url + '&ldv=' + lastDv;
   }
@@ -95,10 +95,13 @@ generateTableHeader = () => {
   const tableHeader = document.createElement('thead');
   let headerDirection = document.createElement('th');
   headerDirection.innerHTML = 'Direction';
+  headerDirection.style.textAlign = 'center';
   let headerAltitude = document.createElement('th');
   headerAltitude.innerHTML = 'Altitude';
+  headerAltitude.style.textAlign = 'center';
   let headerFlightCode = document.createElement('th');
   headerFlightCode.innerHTML = 'Flight code number';
+  headerFlightCode.style.textAlign = 'center';
   tableHeader.appendChild(headerDirection);
   tableHeader.appendChild(headerAltitude);
   tableHeader.appendChild(headerFlightCode);
@@ -112,7 +115,6 @@ generateTableHeader = () => {
  */
 generateTableRow = (airplaneData) => {
   let tableRow = document.createElement('tr');
-  tableRow.style.border = '1px solid black';
   tableRow.onclick = () => showFlightDetails(airplaneData);
 
   let tdAirplaneDirection = document.createElement('td');

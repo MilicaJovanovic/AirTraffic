@@ -24,20 +24,42 @@
   text-align: center;
   margin-top: 50px;
   font-weight: bold;
-  color: #2D2D2F;
+  color: #0C0F3D;
 }
 #description {
   text-align: center;
   margin-top: 30px;
-  color: #706856;
+  color: #542641;
 }
 #table-part {
   background-color: white;
-  border-top: 10px solid #2D2D2F;
+  border-top: 10px solid #0C0F3D;
   border-radius: 3px;
   margin-top: 50px;
   padding: 20px;
+  overflow-y: scroll;
+  height: 50vh;
+}
+#data-table {
+  width: 100%;
+  text-align: center;
+}
+#data-table tr:nth-of-type(odd) {
+  background-color: #fce3d1;
 }
 #locationModal {
   z-index: 100000;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #fce3d1; 
+}
+::-webkit-scrollbar-thumb {
+    background: #D5A899; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #bc8573; 
 }
