@@ -170,15 +170,43 @@ back = () => {
  * flight details
  */
 showFlightDetails = (airplaneData) => {
+  getCompanyDomain(airplaneData);
   clearInterval(dataInterval);
+}
+
+/*
+ * Uses clearbit API to discover company domain
+ * by company name
+ */
+getCompanyDomain = (airplaneData) => {
+  const url = 'https://autocomplete.clearbit.com/v1/companies/suggest?query=' + airplaneData.Op;
+  fetch(url)
+  .then((response) => {
+    response.json()
+    .then((data) => {
+      const companyLogo = getCompanyLogo(data[0].domain, airplaneData);
+
+      return data[0].domain;
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+/*
+ * Returns company using clearbit API
+ * based on company domain
+ */
+getCompanyLogo = (companyDomain, airplaneData) => {
+  const companyLogo = 'http://logo.clearbit.com/' + companyDomain;
+
   const pageParams = {
     airplaneModel: airplaneData.Mdl,
     airportFrom: airplaneData.From,
     airportTo: airplaneData.To,
     airline: airplaneData.Op,
-    onclick: function() {
-      alert('remo');
-    }
+    airlineLogo: companyLogo
   }
   $.get('../templates/flight-details.html', function(template, textStatus, jqXhr) {
     $('#route-view').html(Mustache.render($(template).filter('#flight-details').html(), pageParams))

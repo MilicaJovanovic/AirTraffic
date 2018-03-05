@@ -2,7 +2,7 @@
   <div class="background-image"></div>
   <div class="container">
     <h1 class="title">Flight details</h1>
-    <div id="table-part">
+    <div id="details-part">
    		<span>
 				<h4>Aircraft registration:</h4>
 				<p>{{airplaneModel}}</p>
@@ -19,6 +19,10 @@
    			<h4>Airline:</h4>
    			<p>{{airline}}</p>
    		</span>
+      <span>
+        <h4>Company logo:</h4>
+        <img class="company-logo" src={{airlineLogo}} alt='Airline logo' />
+      </span>
    		<div class="footer">
 	    	<button class="back-button" type="button" onclick="back()">Back</button>
    		</div>
