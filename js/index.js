@@ -70,7 +70,7 @@ loadAirplaneData = (lastDv) => {
   }
 
   setTimeout(() => {
-    fetch(url)
+    fetchJsonp(url)
     .then((response) => {
       response.json()
       .then((data) => {
