@@ -16,8 +16,15 @@ $(document).ready(() => {
  */
 geolocationAllowed = () => {
   $('#locationModal').modal('hide');
+  document.getElementById("loading").style.display = 'block';
   getLocation();
-  loadAirplaneData(lastPlaneListId);
+  const locationFinder = setInterval(() => {
+    if (lat != 0.0 && lng != 0.0) {
+      document.getElementById("loading").style.display = 'none';
+      loadAirplaneData(lastPlaneListId);
+      clearInterval(locationFinder);
+    }
+  }, 1000);
   dataInterval = setInterval(() => {
     loadAirplaneData(lastPlaneListId);
   }, 60*1000);
@@ -56,8 +63,8 @@ getLatLong = (position) => {
  * Loads airplane data from API by using fetch
  */
 loadAirplaneData = (lastDv) => {
-  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
-
+  // let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
+  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=33.433638&lng=-112.008113&fDstL=0&fDstU=100';
   if (lastDv != 0) {
     url = url + '&ldv=' + lastDv;
   }
@@ -138,7 +145,7 @@ generateTableRow = (airplaneData) => {
   }
 
   let tdAltitude = document.createElement('td');
-  tdAltitude.innerHTML = airplaneData.Alt;
+  tdAltitude.innerHTML = airplaneData.Alt + ' ft';
 
   let tdEmail = document.createElement('td');
   tdEmail.innerHTML = airplaneData.Reg;
@@ -173,7 +180,12 @@ back = () => {
   $.get('/templates/index.html', function(template, textStatus, jqXhr) {
     $('#route-view').html(Mustache.render($(template).filter('#index').html()))
   });
-  loadAirplaneData(lastPlaneListId);
+  const locationFinder = setInterval(() => {
+    if (lat != 0.0 && lng != 0.0) {
+      loadAirplaneData(lastPlaneListId);
+      clearInterval(locationFinder);
+    }
+  }, 1000);
   dataInterval = setInterval(() => {
     loadAirplaneData(lastPlaneListId);
   }, 60*1000);
