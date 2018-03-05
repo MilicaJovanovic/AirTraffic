@@ -167,9 +167,9 @@ generateTableRow = (airplaneData) => {
  */
 calculateAirplaneDirection = (airplaneData) => {
   if (airplaneData.Trak > 0.0 && airplaneData.Trak < 180.0) {
-    return 'W';
+    return 'E';
   }
-  return 'E';
+  return 'W';
 }
 
 /*
