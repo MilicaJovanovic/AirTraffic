@@ -56,8 +56,8 @@ getLatLong = (position) => {
  * Loads airplane data from API by using fetch
  */
 loadAirplaneData = (lastDv) => {
-  // let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
-  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=33.433638&lng=-112.008113&fDstL=0&fDstU=100';
+  let url = 'https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?lat=' + lat + '&lng=' + lng + '&fDstL=0&fDstU=100';
+
   if (lastDv != 0) {
     url = url + '&ldv=' + lastDv;
   }
@@ -74,6 +74,9 @@ loadAirplaneData = (lastDv) => {
         $("#data-table").empty();
         table.appendChild(generateTableHeader());
 
+        //Sorting list
+        airplaneList.sort(altitudeSorter);
+
         // Creating table content
         airplaneList.forEach((element) => {
           if (element.Alt !== undefined) {
@@ -86,6 +89,16 @@ loadAirplaneData = (lastDv) => {
       console.log('error ' + err);
     });
   }, 1500);
+}
+
+/*
+ * Sorts airplane list by altitude
+ * by checking higher number
+ */
+altitudeSorter = (a, b) => {
+  var x = a.Alt;
+  var y = b.Alt;
+  return ((x > y) ? -1 : ((x < y) ? 1 : 0));
 }
 
 /*
